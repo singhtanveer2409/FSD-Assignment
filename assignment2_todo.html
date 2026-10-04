@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 2 - DOM To-Do List</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #ffffff; display: flex; justify-content: center; padding-top: 60px; }
+    .box { width: 380px; border: 2px solid #1e66d0; border-radius: 10px; padding: 24px; }
+    h2 { color: #1e66d0; text-align: center; margin-top: 0; }
+    .add { display: flex; gap: 8px; }
+    .add input { flex: 1; padding: 10px; border: 1px solid #1e66d0; border-radius: 5px; font-size: 15px; }
+    button { background: #1e66d0; color: #ffffff; border: none; border-radius: 5px; padding: 10px 14px; cursor: pointer; }
+    button:hover { background: #154fa3; }
+    ul { list-style: none; padding: 0; margin-top: 16px; }
+    li { display: flex; align-items: center; justify-content: space-between; padding: 10px; border-bottom: 1px solid #cfdcf3; color: #1e66d0; }
+    li.done span { text-decoration: line-through; color: #8aa6d6; }
+    li span { flex: 1; cursor: pointer; }
+    .actions button { margin-left: 6px; padding: 6px 10px; font-size: 13px; }
+    .actions .del { background: #ffffff; color: #1e66d0; border: 1px solid #1e66d0; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>To-Do List</h2>
+    <div class="add">
+      <input type="text" id="taskInput" placeholder="Enter a task">
+      <button onclick="addTask()">Add</button>
+    </div>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    var input = document.getElementById("taskInput");
+    var list = document.getElementById("taskList");
+
+    input.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") addTask();
+    });
+
+    function addTask() {
+      var text = input.value.trim();
+      if (text === "") {
+        alert("Please enter a task");
+        return;
+      }
+
+      var li = document.createElement("li");
+
+      var span = document.createElement("span");
+      span.textContent = text;
+
+      var actions = document.createElement("div");
+      actions.className = "actions";
+
+      var doneBtn = document.createElement("button");
+      doneBtn.textContent = "Done";
+      doneBtn.onclick = function () {
+        li.classList.toggle("done");
+      };
+
+      var delBtn = document.createElement("button");
+      delBtn.textContent = "Delete";
+      delBtn.className = "del";
+      delBtn.onclick = function () {
+        list.removeChild(li);
+      };
+
+      actions.appendChild(doneBtn);
+      actions.appendChild(delBtn);
+      li.appendChild(span);
+      li.appendChild(actions);
+      list.appendChild(li);
+
+      input.value = "";
+      input.focus();
+    }
+  </script>
+</body>
+</html>

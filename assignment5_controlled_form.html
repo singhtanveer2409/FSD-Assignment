@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 5 - Controlled React Form</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #ffffff; display: flex; justify-content: center; padding-top: 60px; }
+    .box { width: 340px; border: 2px solid #1e66d0; border-radius: 10px; padding: 24px; }
+    h2 { color: #1e66d0; text-align: center; margin-top: 0; }
+    label { color: #1e66d0; font-size: 14px; display: block; margin-top: 12px; }
+    input, textarea { width: 100%; padding: 10px; margin-top: 4px; box-sizing: border-box; border: 1px solid #1e66d0; border-radius: 5px; font-size: 15px; font-family: Arial, sans-serif; }
+    .output { margin-top: 20px; padding: 12px; border: 1px solid #1e66d0; border-radius: 5px; background: #eef4ff; color: #1e66d0; }
+    .output p { margin: 4px 0; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    function App() {
+      const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+
+      function handleChange(e) {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+      }
+
+      return (
+        <div className="box">
+          <h2>Controlled Form</h2>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <label>Name</label>
+            <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Enter your name" />
+
+            <label>Email</label>
+            <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Enter your email" />
+
+            <label>Message</label>
+            <textarea name="message" rows="3" value={formData.message} onChange={handleChange} placeholder="Enter a message"></textarea>
+          </form>
+
+          <div className="output">
+            <p><strong>Name:</strong> {formData.name}</p>
+            <p><strong>Email:</strong> {formData.email}</p>
+            <p><strong>Message:</strong> {formData.message}</p>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

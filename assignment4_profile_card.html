@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 4 - React Profile Card</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #ffffff; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; padding-top: 60px; }
+    .card { width: 240px; border: 2px solid #1e66d0; border-radius: 10px; padding: 20px; text-align: center; }
+    .card img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid #1e66d0; object-fit: cover; }
+    .card h3 { color: #1e66d0; margin: 12px 0 6px; }
+    .card p { color: #444444; font-size: 14px; margin: 0; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // ProfileCard component receives name, image and description through props
+    function ProfileCard(props) {
+      return (
+        <div className="card">
+          <img src={props.image} alt={props.name} />
+          <h3>{props.name}</h3>
+          <p>{props.description}</p>
+        </div>
+      );
+    }
+
+    function App() {
+      return (
+        <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", justifyContent: "center" }}>
+          <ProfileCard
+            name="Tanveer Singh"
+            image="tanveer.jpg"
+            description="MCA student interested in machine learning and web development."
+          />
+          <ProfileCard
+            name="Vipul Prasad"
+            image="vipul.jpeg"
+            description="Full-stack developer who loves building React apps."
+          />
+          <ProfileCard
+            name="Yadnyesh Sawant"
+            image="yadnyesh.jpeg"
+            description="Backend developer working with Java and databases."
+          />
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
